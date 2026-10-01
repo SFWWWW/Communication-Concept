@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>传播学概念 · 理论 · 研究方法 学习手册</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div class="brand">
+      <div class="logo">传</div>
+      <div class="brand-text">
+        <h1>传播学概念 · 理论 · 研究方法</h1>
+        <p>An Interactive Primer for Communication Studies</p>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="搜索概念、理论、学者、关键词…" autocomplete="off">
+      <kbd>/</kbd>
+      <div id="suggest" class="suggest" hidden></div>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-tab="home">导览</button>
+    <button class="tab" data-tab="library">概念与理论库</button>
+    <button class="tab" data-tab="methods">研究方法</button>
+    <button class="tab" data-tab="timeline">发展脉络</button>
+    <button class="tab" data-tab="path">学习路径</button>
+  </nav>
+</header>
+
+<main class="wrap main">
+
+  <!-- 导览 -->
+  <section id="tab-home" class="panel">
+    <div class="hero">
+      <div class="hero-left">
+        <span class="eyebrow">学科入门 · 自学伴侣</span>
+        <h2>把传播学的地图装在<span class="hl">一个页面</span>里</h2>
+        <p class="lede">
+          传播学的难题从来不是概念太少，而是概念太多、彼此重叠。这份手册把散落在教材各处的内容
+          收拢成三层结构：<b>词汇表</b>（核心概念）→<b>解释工具</b>（理论）→<b>取证工具</b>（研究方法），
+          每个条目都附带「怎么用在论文里」和「它的边界在哪」。
+        </p>
+        <div class="hero-actions">
+          <button class="btn primary" data-goto="library">进入概念库</button>
+          <button class="btn" data-goto="path">看看怎么学</button>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="num" id="stat-total">78</span><span class="lbl">条目</span></div>
+        <div class="stat"><span class="num" id="stat-theory">—</span><span class="lbl">理论</span></div>
+        <div class="stat"><span class="num" id="stat-method">—</span><span class="lbl">研究方法</span></div>
+        <div class="stat"><span class="num">9</span><span class="lbl">知识板块</span></div>
+      </div>
+    </div>
+
+    <h3 class="sec-title">学科地图：九个板块</h3>
+    <div class="map-grid" id="mapGrid"></div>
+
+    <h3 class="sec-title">一张图看懂：三大范式如何分层</h3>
+    <div class="layer-diagram">
+      <div class="layer" data-key="critic">
+        <div class="layer-tag">批判层</div>
+        <div class="layer-body"><strong>谁在说话？</strong><span>批判理论 · 文化研究 · 政治经济学 · 符号/修辞——追问意义的权力后果。</span></div>
+      </div>
+      <div class="layer" data-key="effect">
+        <div class="layer-tag">效果层</div>
+        <div class="layer-body"><strong>它起了什么作用？</strong><span>议程设置 · 框架 · 沉默的螺旋 · 涵化 · 第三人效果——可中长期、可宏观。</span></div>
+      </div>
+      <div class="layer" data-key="model">
+        <div class="layer-tag">过程层</div>
+        <div class="layer-body"><strong>它是怎么走的？</strong><span>5W · 香农-韦弗 · 循环模型 · 系统模型——把过程拆成可研究的环节。</span></div>
+      </div>
+      <div class="layer" data-key="core">
+        <div class="layer-tag">基础层</div>
+        <div class="layer-body"><strong>我们在说什么？</strong><span>传播 · 信息 · 符号 · 编码解码 · 把关 · 受众——学科的词汇表。</span></div>
+      </div>
+      <div class="layer foot">
+        <div class="layer-tag">方法底座</div>
+        <div class="layer-body"><strong>凭什么这么说？</strong><span>定量 / 定性 / 计算——所有理论主张最终都要落到证据与效度。</span></div>
+      </div>
+    </div>
+
+    <h3 class="sec-title">易混淆：这六组不要再用混了</h3>
+    <div class="confusion-grid" id="confusionGrid"></div>
+  </section>
+
+  <!-- 概念库 -->
+  <section id="tab-library" class="panel" hidden>
+    <div class="filter-bar">
+      <div class="chips" id="filterChips"></div>
+      <div class="filter-right">
+        <select id="levelFilter">
+          <option value="">全部难度</option>
+          <option value="入阶">入阶</option>
+          <option value="进阶">进阶</option>
+          <option value="高阶">高阶</option>
+        </select>
+        <select id="typeFilter">
+          <option value="">全部类型</option>
+          <option value="core">核心概念</option>
+          <option value="theory">理论 / 模式</option>
+          <option value="method">研究方法</option>
+        </select>
+        <span class="result-count" id="resultCount"></span>
+      </div>
+    </div>
+    <div class="card-grid" id="cardGrid"></div>
+    <div class="empty" id="emptyState" hidden>没有匹配的条目，换个关键词试试。</div>
+  </section>
+
+  <!-- 研究方法 -->
+  <section id="tab-methods" class="panel" hidden>
+    <p class="sec-intro">
+      方法不是技术的清单，而是「我凭什么相信这个结论」的一套论证。选方法的顺序应当永远是：
+      <b>先有研究问题，再倒推方法</b>。下面这张对照表是最常被抄进笔记的一页。
+    </p>
+    <div class="table-wrap"><table class="cmp-table" id="methodTable"></table></div>
+
+    <h3 class="sec-title">选方法的三个问题</h3>
+    <div class="qa-blocks">
+      <div class="qa">
+        <div class="q">你的问题问的是「多少」还是「为什么」？</div>
+        <div class="a">问多少 / 关系强度 → 定量（问卷、实验、内容分析）。问机制、意义、过程 → 定性（访谈、民族志、话语分析）。
+          若两者都要，考虑混合设计。</div>
+      </div>
+      <div class="qa">
+        <div class="q">你要推论到谁？</div>
+        <div class="a">要推论到总体 → 需要概率抽样 + 足够样本量。要深挖典型案例 → 目的性抽样 + 理论饱和。
+          样本小不是缺点，只要说清推论边界。</div>
+      </div>
+      <div class="qa">
+        <div class="q">数据是现成的还是要你生产的？</div>
+        <div class="a">现成大数据 → 先做数据审计，弄清平台给了你什么、屏蔽了什么。
+          自己生产 → 关注信效度与伦理审查（IRB）。</div>
+      </div>
+    </div>
+
+    <h3 class="sec-title">方法条目</h3>
+    <div class="filter-bar">
+      <div class="chips" id="methodChips"></div>
+    </div>
+    <div class="card-grid" id="methodGrid"></div>
+  </section>
+
+  <!-- 脉络 -->
+  <section id="tab-timeline" class="panel" hidden>
+    <p class="sec-intro">
+      传播学的历史不是 Accumulate 的线性进步，而是几个传统彼此竞争与交替的过程：
+      经验学派问「是否有效」，批判学派问「对谁有利」，媒介环境学派问「这个媒介本身在做什么」。
+    </p>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <!-- 路径 -->
+  <section id="tab-path" class="panel" hidden>
+    <p class="sec-intro">
+      四阶段自学路线。<b>点击条目标记完成</b>，点击右侧箭头查看详解；
+      勾选进度会存在本地浏览器里，随时回来继续。每个阶段都默认你已经掌握了上一阶段的词汇。
+    </p>
+    <div class="path-progress">
+      <div class="pp-bar"><div class="pp-fill" id="ppFill"></div></div>
+      <span id="ppText">0 / 36</span>
+      <button class="btn ghost small" id="resetPath">重置进度</button>
+    </div>
+    <div id="pathList"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>传播学概念 · 理论 · 研究方法学习页 · 共 <b id="footCount">78</b> 个条目</p>
+    <p class="muted">内容为学科通识整理，供学习与课程参考；引用请以原著与教材为准。</p>
+  </div>
+</footer>
+
+<!-- 详情弹层 -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-mask" data-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close aria-label="关闭">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/detail.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
